@@ -1,0 +1,19 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: metisDb
+      POSTGRES_USER: metisDbUser
+      POSTGRES_PASSWORD: metisPassword
+    ports:
+      - "5432:5432"
+
+  nodejs:
+    build:
+      context: .
+      dockerfile: Dockerfile-nodejs
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
